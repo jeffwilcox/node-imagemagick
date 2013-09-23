@@ -1,6 +1,10 @@
 var childproc = require('child_process'),
     EventEmitter = require('events').EventEmitter;
 
+// HACK: Do not use this NPM module unless you are me.
+// my custom binary prefix - Windows only for now! (Linux would have an empty string here)
+exports.imagemagickBinariesPath = './bin/imagemagick/';
+
 
 function exec2(file, args /*, options, callback */) {
   var options = { encoding: 'utf8'
@@ -21,7 +25,7 @@ function exec2(file, args /*, options, callback */) {
     }
   }
 
-  var child = childproc.spawn(file, args);
+  var child = childproc.spawn(exports.imagemagickBinariesPath + file, args);
   var killed = false;
   var timedOut = false;
 
